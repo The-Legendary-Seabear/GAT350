@@ -8,11 +8,8 @@
     <Filter Include="Assets">
       <UniqueIdentifier>{7d2ce0eb-c054-4fe8-a9fe-1efa54b53c25}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assets\Space">
-      <UniqueIdentifier>{9f650435-4081-4ca5-8638-b1914bf07793}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets\Platformer">
-      <UniqueIdentifier>{0347569d-48c0-471b-8c02-8fb12964f431}</UniqueIdentifier>
+    <Filter Include="Assets\Shaders">
+      <UniqueIdentifier>{81e666e2-071c-4647-91a5-d5b6013b3a74}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -29,20 +26,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Build\Assets\Meshes\enemy.msh">
-      <Filter>Assets\Space</Filter>
+    <None Include="..\..\Build\Assets\Shaders\basic.vert">
+      <Filter>Assets\Shaders</Filter>
     </None>
-    <None Include="..\..\Build\Assets\scene.json">
-      <Filter>Assets\Space</Filter>
-    </None>
-    <None Include="..\..\Build\Assets\Platformer\Scenes\prototypes.json">
-      <Filter>Assets\Platformer</Filter>
-    </None>
-    <None Include="..\..\Build\Assets\Platformer\Scenes\level.json">
-      <Filter>Assets\Platformer</Filter>
-    </None>
-    <None Include="..\..\Build\Assets\Platformer\Tilemaps\tilemap.json">
-      <Filter>Assets\Platformer</Filter>
+    <None Include="..\..\Build\Assets\Shaders\basic.frag">
+      <Filter>Assets\Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

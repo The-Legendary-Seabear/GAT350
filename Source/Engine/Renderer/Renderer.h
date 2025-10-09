@@ -1,4 +1,5 @@
 #pragma once
+#include <glad/glad.h>
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
 #include <SDL3_image/SDL_image.h>
@@ -15,6 +16,8 @@ namespace neu {
 	{
 	public:
 		Renderer() = default;
+
+		
 
 		/// <summary>
 		/// Initializes SDL video and TTF (TrueType font) systems.

@@ -104,6 +104,9 @@
     <ClCompile Include="Audio\AudioChannel.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\ThirdParty\glad\src\glad.c">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Random.h">
