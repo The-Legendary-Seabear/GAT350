@@ -218,7 +218,7 @@ namespace neu {
     /// </summary>
     void Renderer::Clear() {
         //SDL_RenderClear(m_renderer);
-        glClearColor(0.53f, 0.81f, 0.98f, 1);
+        glClearColor(0.0f, 0.0f, 0.0f, 1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
