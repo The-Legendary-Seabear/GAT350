@@ -57,76 +57,6 @@ namespace neu {
 		/// </summary>
 		void Present();
 
-		/// <summary>
-		/// Sets the draw color using 8-bit color values (0-255).
-		/// This color is used for drawing primitives and clearing the screen.
-		/// </summary>
-		/// <param name="r">Red component (0-255)</param>
-		/// <param name="g">Green component (0-255)</param>
-		/// <param name="b">Blue component (0-255)</param>
-		/// <param name="a">Alpha component (0-255), default is 255 (fully opaque)</param>
-		void SetColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);
-
-		/// <summary>
-		/// Sets the draw color using normalized float values (0.0-1.0).
-		/// This color is used for drawing primitives and clearing the screen.
-		/// </summary>
-		/// <param name="r">Red component (0.0-1.0)</param>
-		/// <param name="g">Green component (0.0-1.0)</param>
-		/// <param name="b">Blue component (0.0-1.0)</param>
-		/// <param name="a">Alpha component (0.0-1.0), default is 1.0 (fully opaque)</param>
-		void SetColor(float r, float g, float b, float a = 1.0f);
-
-		/// <summary>
-		/// Draws a line between two points using the current draw color.
-		/// </summary>
-		/// <param name="x1">X-coordinate of the starting point</param>
-		/// <param name="y1">Y-coordinate of the starting point</param>
-		/// <param name="x2">X-coordinate of the ending point</param>
-		/// <param name="y2">Y-coordinate of the ending point</param>
-		void DrawLine(float x1, float y1, float x2, float y2);
-
-		/// <summary>
-		/// Draws a single point at the specified coordinates using the current draw color.
-		/// </summary>
-		/// <param name="x">X-coordinate of the point</param>
-		/// <param name="y">Y-coordinate of the point</param>
-		void DrawPoint(float x, float y);
-
-		/// <summary>
-		/// Draws a texture at the specified position with its natural size.
-		/// The position specifies the top-left corner of the texture.
-		/// </summary>
-		/// <param name="texture">The texture to draw</param>
-		/// <param name="x">X-coordinate of the top-left corner</param>
-		/// <param name="y">Y-coordinate of the top-left corner</param>
-		void DrawTexture(class Texture& texture, float x, float y);
-
-		/// <summary>
-		/// Draws a texture with transformation (rotation, scale, flip).
-		/// The position specifies the center of the texture.
-		/// </summary>
-		/// <param name="texture">The texture to draw</param>
-		/// <param name="x">X-coordinate of the center of the texture</param>
-		/// <param name="y">Y-coordinate of the center of the texture</param>
-		/// <param name="angle">Rotation angle in degrees (clockwise)</param>
-		/// <param name="scale">Uniform scale factor (1.0 = normal size)</param>
-		/// <param name="flipH">If true, flips the texture horizontally</param>
-		void DrawTexture(class Texture& texture, float x, float y, float angle, float scale = 1, bool flipH = false);
-
-		/// <summary>
-		/// Draws a portion of a texture (specified by sourceRect) with transformation.
-		/// Useful for sprite sheets and texture atlases.
-		/// The position specifies the center of the drawn region.
-		/// </summary>
-		/// <param name="texture">The texture to draw from</param>
-		/// <param name="sourceRect">The rectangular region of the texture to draw</param>
-		/// <param name="x">X-coordinate of the center of the drawn region</param>
-		/// <param name="y">Y-coordinate of the center of the drawn region</param>
-		/// <param name="angle">Rotation angle in degrees (clockwise)</param>
-		/// <param name="scale">Uniform scale factor (1.0 = normal size)</param>
-		/// <param name="flipH">If true, flips the texture horizontally</param>
-		void DrawTexture(class Texture& texture, const rect& sourceRect, float x, float y, float angle, float scale = 1, bool flipH = false);
 
 		/// <summary>
 		/// Gets the width of the window/render target.
@@ -152,7 +82,6 @@ namespace neu {
 		// SDL window handle
 		SDL_Window* m_window = nullptr;
 
-		// SDL renderer handle used for all drawing operations
-		SDL_Renderer* m_renderer = nullptr;
+		SDL_GLContext m_context;
 	};
 }

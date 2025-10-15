@@ -1,6 +1,8 @@
 #pragma once
 #include "Resources/Resource.h"
 #include "Math/Vector2.h"
+
+#include <glad/glad.h>
 #include <string>
 
 struct SDL_Texture;
@@ -24,7 +26,7 @@ namespace neu {
 		/// <param name="filename">Path to the image file (e.g., "assets/textures/player.png")</param>
 		/// <param name="renderer">Reference to the Renderer that will manage this texture</param>
 		/// <returns>True if the texture was successfully loaded; otherwise, false</returns>
-		bool Load(const std::string& filename, class Renderer& renderer);
+		bool Load(const std::string& filename);
 
 		/// <summary>
 		/// Gets the dimensions of the texture in pixels.
@@ -35,10 +37,9 @@ namespace neu {
 		// Allow Renderer class to access the texture for drawing operations
 		friend class Renderer;
 
+		GLuint m_texture = 0;
 	private:
-		// Pointer to the underlying SDL texture object stored in GPU memory
-		// Initialized to nullptr and managed throughout the texture's lifetime
-		SDL_Texture* m_texture{ nullptr };
+		GLenum m_target = GL_TEXTURE_2D;
 
 		// The dimensions of the texture in pixels
 		vec2 m_size{ 0, 0 };

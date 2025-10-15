@@ -132,7 +132,7 @@ namespace neu {
 
         // Attempt to load the resource with provided arguments
         // Perfect forwarding preserves argument value categories
-        if (resource->Load(name, std::forward<Args>(args)...) == false) {
+        if (resource->Load(name) == false) {
             LOG_ERROR("Could not load resource: {}", name);
             return res_t<T>();  // Return empty shared_ptr on load failure
         }

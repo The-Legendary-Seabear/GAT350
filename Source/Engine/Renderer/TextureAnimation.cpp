@@ -31,7 +31,7 @@ namespace neu {
 		SERIAL_READ(document, texture_name);
 
 		// Load the sprite sheet texture using the resource manager
-		m_texture = Resources().Get<Texture>(texture_name, renderer);
+		//m_texture = Resources().Get<Texture>(texture_name, renderer);
 		if (!m_texture) {
 			LOG_ERROR("Could not load texture in Texture Animation {}", texture_name);
 		}
