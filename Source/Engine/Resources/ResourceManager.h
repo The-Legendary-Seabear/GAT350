@@ -132,10 +132,12 @@ namespace neu {
 
         // Attempt to load the resource with provided arguments
         // Perfect forwarding preserves argument value categories
-        if (resource->Load(name) == false) {
+        
+        if (resource->Load(name, std::forward<Args>(args)...) == false) {
             LOG_ERROR("Could not load resource: {}", name);
             return res_t<T>();  // Return empty shared_ptr on load failure
         }
+        
 
         // Successfully loaded - add to cache for future use
         // Store as base Resource pointer for type erasure

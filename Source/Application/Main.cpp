@@ -98,7 +98,6 @@ int main(int argc, char* argv[]) {
     glEnableVertexAttribArray(2);
     glBindBuffer(GL_ARRAY_BUFFER, vbo[2]);
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, NULL);
-    */
 
     //vertex shader
     std::string vs_source;
@@ -140,9 +139,24 @@ int main(int argc, char* argv[]) {
 
         LOG_WARNING("Shader compilation failed: {}", infoLog);
     }
+    */
+
+
+    //shaders
+    auto vs = neu::Resources().Get<neu::Shader>("shaders/basic.vert", GL_VERTEX_SHADER);
+    auto fs = neu::Resources().Get<neu::Shader>("shaders/basic.frag", GL_FRAGMENT_SHADER);
 
     //program
-    GLuint program = glCreateProgram();
+    auto program = std::make_shared<neu::Program>();
+    program->AttachShader(vs);
+    program->AttachShader(fs);
+    program->Link();
+    program->Use();
+
+    program->SetUniform("u_time", 0);
+
+    /*
+    GLuint program = std::make_shared<neu::Program>();
     glAttachShader(program, vs);
     glAttachShader(program, fs);
     glLinkProgram(program);
@@ -158,16 +172,27 @@ int main(int argc, char* argv[]) {
 
         LOG_WARNING("Program link failed: {}", infoLog);
     }
+    */ 
 
     //texture
     neu::res_t<neu::Texture> texture = neu::Resources().Get<neu::Texture>("textures/beast.png");
 
+    /*
     //uniform
     GLint uniform = glGetUniformLocation(program, "u_time");
     //ASSERT(uniform != -1);
 
     GLint tex_uniform = glGetUniformLocation(program, "u_texture");
     glUniform1i(tex_uniform, 0);
+    */
+
+    
+
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f));
+    model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+    program->SetUniform("u_model", model);
 
     // MAIN LOOP
     while (!quit) {
@@ -182,7 +207,7 @@ int main(int argc, char* argv[]) {
 
         if (neu::GetEngine().GetInput().GetKeyPressed(SDL_SCANCODE_ESCAPE)) quit = true;
 
-        glUniform1f(uniform, neu::GetEngine().GetTime().GetTime());
+        //glUniform1f(uniform, neu::GetEngine().GetTime().GetTime());
 
 
         // draw

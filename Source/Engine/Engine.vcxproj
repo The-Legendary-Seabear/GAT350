@@ -93,7 +93,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Engine;$(SolutionDir)Source\ThirdParty\SDL3\include;$(SolutionDir)Source\ThirdParty\fmod\core\inc;$(SolutionDir)Source\ThirdParty\rapidjson\include;$(SolutionDir)Source\ThirdParty\glad\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Engine;$(SolutionDir)Source\ThirdParty\SDL3\include;$(SolutionDir)Source\ThirdParty\fmod\core\inc;$(SolutionDir)Source\ThirdParty\rapidjson\include;$(SolutionDir)Source\ThirdParty\glad\include;$(SolutionDir)Source\ThirdParty\glm</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>EnginePCH.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>EnginePCH.h</ForcedIncludeFiles>
@@ -118,7 +118,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Engine;$(SolutionDir)Source\ThirdParty\SDL3\include;$(SolutionDir)Source\ThirdParty\fmod\core\inc;$(SolutionDir)Source\ThirdParty\rapidjson\include;$(SolutionDir)Source\ThirdParty\glad\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Engine;$(SolutionDir)Source\ThirdParty\SDL3\include;$(SolutionDir)Source\ThirdParty\fmod\core\inc;$(SolutionDir)Source\ThirdParty\rapidjson\include;$(SolutionDir)Source\ThirdParty\glad\include;$(SolutionDir)Source\ThirdParty\glm</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>EnginePCH.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>EnginePCH.h</ForcedIncludeFiles>
@@ -141,7 +141,7 @@
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Engine;$(SolutionDir)Source\ThirdParty\SDL3\include;$(SolutionDir)Source\ThirdParty\fmod\core\inc;$(SolutionDir)Source\ThirdParty\rapidjson\include;$(SolutionDir)Source\ThirdParty\glad\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Engine;$(SolutionDir)Source\ThirdParty\SDL3\include;$(SolutionDir)Source\ThirdParty\fmod\core\inc;$(SolutionDir)Source\ThirdParty\rapidjson\include;$(SolutionDir)Source\ThirdParty\glad\include;$(SolutionDir)Source\ThirdParty\glm</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>EnginePCH.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>EnginePCH.h</ForcedIncludeFiles>
@@ -166,7 +166,7 @@
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Source\Engine;$(SolutionDir)Source\ThirdParty\SDL3\include;$(SolutionDir)Source\ThirdParty\fmod\core\inc;$(SolutionDir)Source\ThirdParty\rapidjson\include;$(SolutionDir)Source\ThirdParty\glad\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Source\Engine;$(SolutionDir)Source\ThirdParty\SDL3\include;$(SolutionDir)Source\ThirdParty\fmod\core\inc;$(SolutionDir)Source\ThirdParty\rapidjson\include;$(SolutionDir)Source\ThirdParty\glad\include;$(SolutionDir)Source\ThirdParty\glm</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>EnginePCH.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>EnginePCH.h</ForcedIncludeFiles>
@@ -217,10 +217,9 @@
     <ClCompile Include="Framework\Scene.cpp" />
     <ClCompile Include="Input\InputSystem.cpp" />
     <ClCompile Include="Math\Transform.cpp" />
-    <ClCompile Include="Renderer\Font.cpp" />
-    <ClCompile Include="Renderer\Mesh.cpp" />
+    <ClCompile Include="Renderer\Program.cpp" />
     <ClCompile Include="Renderer\Renderer.cpp" />
-    <ClCompile Include="Renderer\Text.cpp" />
+    <ClCompile Include="Renderer\Shader.cpp" />
     <ClCompile Include="Renderer\Texture.cpp" />
     <ClCompile Include="Renderer\TextureAnimation.cpp" />
   </ItemGroup>
@@ -256,10 +255,9 @@
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="Physics\Collidable.h" />
-    <ClInclude Include="Renderer\Font.h" />
-    <ClInclude Include="Renderer\Mesh.h" />
+    <ClInclude Include="Renderer\Program.h" />
     <ClInclude Include="Renderer\Renderer.h" />
-    <ClInclude Include="Renderer\Text.h" />
+    <ClInclude Include="Renderer\Shader.h" />
     <ClInclude Include="Renderer\Texture.h" />
     <ClInclude Include="Renderer\TextureAnimation.h" />
     <ClInclude Include="Resources\Resource.h" />

@@ -56,15 +56,6 @@
     <ClCompile Include="Audio\AudioSystem.cpp">
       <Filter>Source\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\Mesh.cpp">
-      <Filter>Source\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\Font.cpp">
-      <Filter>Source\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\Text.cpp">
-      <Filter>Source\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\Scene.cpp">
       <Filter>Source\Framework</Filter>
     </ClCompile>
@@ -107,6 +98,12 @@
     <ClCompile Include="..\ThirdParty\glad\src\glad.c">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer\Program.cpp">
+      <Filter>Source\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Shader.cpp">
+      <Filter>Source\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Random.h">
@@ -136,17 +133,8 @@
     <ClInclude Include="Core\StringHelper.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\Mesh.h">
-      <Filter>Source\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="Math\Transform.h">
       <Filter>Source\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\Font.h">
-      <Filter>Source\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\Text.h">
-      <Filter>Source\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Actor.h">
       <Filter>Source\Framework</Filter>
@@ -171,9 +159,6 @@
     </ClInclude>
     <ClInclude Include="Core\Logger.h">
       <Filter>Source\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineMinimal.h">
-      <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="EnginePCH.h">
       <Filter>Source</Filter>
@@ -225,6 +210,15 @@
     </ClInclude>
     <ClInclude Include="Audio\AudioChannel.h">
       <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineMinimal.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Program.h">
+      <Filter>Source\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Shader.h">
+      <Filter>Source\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
