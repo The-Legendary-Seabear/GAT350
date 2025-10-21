@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
     vb->SetAttribute(2, 2, sizeof(Vertex), offsetof(Vertex, texcoord));
     */
     auto model3d = std::make_shared<neu::Model>();
-    model3d->Load("models/sphere.obj");
+    model3d->Load("models/cube.obj");
 
     
     //shaders
@@ -79,23 +79,28 @@ int main(int argc, char* argv[]) {
 
         // update
         neu::GetEngine().Update();
-
+        float dt = neu::GetEngine().GetTime().GetDeltaTime();
         if (neu::GetEngine().GetInput().GetKeyPressed(SDL_SCANCODE_ESCAPE)) quit = true;
 
-        rotation += neu::GetEngine().GetTime().GetDeltaTime() * 90;
+        rotation += dt * 90;
 
         //model matrix
-    glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f));
-    model = glm::rotate(model, glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f));
-    model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
-    program->SetUniform("u_model", model);
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+        model = glm::rotate(model, glm::radians(rotation), glm::vec3(1.0f, 0.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+        program->SetUniform("u_model", model);
 
-    //view matrix
-    eye.x += neu::GetEngine().GetInput().GetMouseDelta().x * 0.01f;
-    eye.y += neu::GetEngine().GetInput().GetMouseDelta().y * 0.01f;
-    glm::mat4 view = glm::lookAt(eye, eye + glm::vec3{ 0, 0, -1 }, glm::vec3{ 0, 1, 0 });
-    program->SetUniform("u_view", view);
+        //view matrix
+
+        if (neu::GetEngine().GetInput().GetKeyDown(SDL_SCANCODE_A)) eye.x += 10.0f * dt;
+        if (neu::GetEngine().GetInput().GetKeyDown(SDL_SCANCODE_D)) eye.x -= 10.0f * dt;
+        if (neu::GetEngine().GetInput().GetKeyDown(SDL_SCANCODE_W)) eye.z -= 10.0f * dt;
+        if (neu::GetEngine().GetInput().GetKeyDown(SDL_SCANCODE_S)) eye.z += 10.0f * dt;
+
+        //eye.y -= neu::GetEngine().GetInput().GetMouseDelta().y * 0.01f;
+        glm::mat4 view = glm::lookAt(eye, eye + glm::vec3{ 0, 0, -1 }, glm::vec3{ 0, 1, 0 });
+        program->SetUniform("u_view", view);
 
         neu::GetEngine().GetRenderer().Clear();
 
