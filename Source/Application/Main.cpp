@@ -31,6 +31,7 @@ int main(int argc, char* argv[]) {
 
     std::vector<short> indices{0, 1, 2, 2, 3, 0};
 
+    /*
     //vertex buffer
     neu::res_t<neu::VertexBuffer> vb = std::make_shared<neu::VertexBuffer>();
     vb->CreateVertexBuffer((GLsizei)(sizeof(Vertex))* vertices.size(), (GLsizei)vertices.size(), vertices.data());
@@ -38,6 +39,9 @@ int main(int argc, char* argv[]) {
     vb->SetAttribute(0, 3, sizeof(Vertex), offsetof(Vertex, position));
     vb->SetAttribute(1, 3, sizeof(Vertex), offsetof(Vertex, color));
     vb->SetAttribute(2, 2, sizeof(Vertex), offsetof(Vertex, texcoord));
+    */
+    auto model3d = std::make_shared<neu::Model>();
+    model3d->Load("models/sphere.obj");
 
     
     //shaders
@@ -95,8 +99,8 @@ int main(int argc, char* argv[]) {
 
         neu::GetEngine().GetRenderer().Clear();
 
-		vb->Draw(GL_TRIANGLES);
-        
+		//vb->Draw(GL_TRIANGLES);
+        model3d->Draw(GL_TRIANGLES);
 
 
         neu::GetEngine().GetRenderer().Present();
