@@ -30,8 +30,8 @@ void main()
 {
 v_texcoord = (a_texcoord * u_material.tiling) + u_material.offset;
 	mat4 model_view = u_view * u_model;
-	vec3 position = vec3(model_view * vec4(a_position, 1));
-	vec3 normal = normalize(mat3(model_view) * a_normal);
+	v_position = vec3(model_view * vec4(a_position, 1));
+	v_normal = normalize(mat3(model_view) * a_normal);
 
 	gl_Position = u_projection * u_view * u_model * vec4(a_position, 1.0);
 }
