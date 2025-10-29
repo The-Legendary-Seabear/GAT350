@@ -3,9 +3,9 @@
 in vec2 v_texcoord;
 in vec3 v_position;
 in vec3 v_normal;
-flat in vec3 v_color;
 
 out vec4 f_color;
+
 
 uniform struct Light
 {
@@ -13,8 +13,6 @@ uniform struct Light
 	vec3 color;
 } u_light;
 
-uniform vec3 u_ambient_light;
-uniform sampler2D u_texture;
 
 uniform struct Material 
 {
@@ -26,6 +24,9 @@ vec3 baseColor;
 	vec2 tiling;
 	vec2 offset;
 } u_material;
+
+
+uniform vec3 u_ambient_light;
 
 vec3 calculateLight(in vec3 position, in vec3 normal)
 {
@@ -50,5 +51,5 @@ return u_ambient_light + diffuse + specular;
 void main()
 {
 vec3 color = calculateLight(v_position, v_normal);
-	f_color = texture(u_texture, v_texcoord) * vec4(color, 1);
+	f_color = texture(u_material.baseMap, v_texcoord) * vec4(color, 1);
 }
