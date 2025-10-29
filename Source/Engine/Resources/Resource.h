@@ -23,6 +23,8 @@ namespace neu {
         /// and ensures derived class destructors are called correctly.
         /// </summary>
         virtual ~Resource() = default;
+
+        std::string name;
     };
 
     /// <summary>

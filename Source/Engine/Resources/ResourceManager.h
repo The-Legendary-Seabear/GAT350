@@ -142,6 +142,7 @@ namespace neu {
         // Successfully loaded - add to cache for future use
         // Store as base Resource pointer for type erasure
         m_resources[key] = resource;
+        resource->name = key;
 
         return resource;
     }

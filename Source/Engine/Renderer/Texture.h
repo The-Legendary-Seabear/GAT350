@@ -27,6 +27,9 @@ namespace neu {
 		/// <param name="renderer">Reference to the Renderer that will manage this texture</param>
 		/// <returns>True if the texture was successfully loaded; otherwise, false</returns>
 		bool Load(const std::string& filename);
+		
+		void SetActive(GLuint unit) { glActiveTexture(unit); }
+		void Bind() { glBindTexture(m_target, m_texture); }
 
 		/// <summary>
 		/// Gets the dimensions of the texture in pixels.

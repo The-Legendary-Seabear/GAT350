@@ -83,7 +83,7 @@ namespace neu::serial
         return true;
     }
 
-    bool Read(const value_t& value, const std::string& name, vec2& data, bool required) {
+    bool Read(const value_t& value, const std::string& name, glm::vec2& data, bool required) {
         // check if the value has the "<name>" and is an array with 2 elements
         if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsArray() || value[name.c_str()].Size() != 2) {
             if (required) LOG_ERROR("Could not read Json value (vec2): {}.", name);
@@ -106,7 +106,7 @@ namespace neu::serial
         return true;
     }
 
-    bool Read(const value_t& value, const std::string& name, vec3& data, bool required)
+    bool Read(const value_t& value, const std::string& name, glm::vec3& data, bool required)
     {
         // check if the value has the "<name>" and is an array with 3 elements
         if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsArray() || value[name.c_str()].Size() != 3) {
