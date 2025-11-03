@@ -17,6 +17,9 @@
     <Filter Include="Assets\Materials">
       <UniqueIdentifier>{7b7c3e98-6d6d-4b8a-85aa-9cd537bd1c91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\Scenes">
+      <UniqueIdentifier>{1adab081-c791-40ec-ac6b-69f983d3991e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -58,6 +61,12 @@
     </None>
     <None Include="..\..\Build\Assets\Shaders\basic_phong.frag">
       <Filter>Assets\Shaders</Filter>
+    </None>
+    <None Include="..\..\Build\Assets\Scenes\scene01.json">
+      <Filter>Assets\Scenes</Filter>
+    </None>
+    <None Include="..\..\Build\Assets\Materials\halloween.mat">
+      <Filter>Assets\Materials</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
