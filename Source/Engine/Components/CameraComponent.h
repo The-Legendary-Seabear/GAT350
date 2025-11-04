@@ -1,7 +1,7 @@
 #pragma once
 
 namespace neu {
-	class CameraComponent : public Component, GUI {
+	class CameraComponent : public Component {
 	public:
 		CLASS_PROTOTYPE(CameraComponent)
 

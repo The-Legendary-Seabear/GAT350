@@ -100,6 +100,8 @@ namespace neu {
 		// Virtual to allow derived actors to override behavior
 		virtual void Draw(class Renderer& renderer);
 
+		void UpdateGui() override;
+
 		/// <summary>
 		/// Adds a component to the actor.
 		/// 

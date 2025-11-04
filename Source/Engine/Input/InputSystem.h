@@ -248,7 +248,7 @@ namespace neu {
         /// or UI element positioning.
         /// </summary>
         /// <returns>Vector2 containing the current mouse position (x, y) in pixels</returns>
-        const vec2& GetMousePosition() const { return m_mousePosition; }
+        const glm::vec2& GetMousePosition() const { return m_mousePosition; }
 
         /// <summary>
         /// Gets the mouse position from the previous frame.
@@ -259,7 +259,7 @@ namespace neu {
         /// or input smoothing algorithms.
         /// </summary>
         /// <returns>Vector2 containing the previous frame's mouse position (x, y) in pixels</returns>
-        const vec2& GetPreviousMousePosition() const { return m_prevMousePosition; }
+        const glm::vec2& GetPreviousMousePosition() const { return m_prevMousePosition; }
 
         /// <summary>
         /// Calculates the mouse movement delta since the last frame.
@@ -277,7 +277,7 @@ namespace neu {
         /// left/up relative to the previous frame.
         /// </summary>
         /// <returns>Vector2 containing the mouse movement delta (deltaX, deltaY) in pixels</returns>
-        vec2 GetMouseDelta() const { return m_mousePosition - m_prevMousePosition; }
+        glm::vec2 GetMouseDelta() const { return m_mousePosition - m_prevMousePosition; }
 
     private:
         /// <summary>
@@ -316,7 +316,7 @@ namespace neu {
         /// compatibility with other engine systems that may perform mathematical
         /// operations on mouse coordinates.
         /// </summary>
-        neu::vec2 m_mousePosition{ 0, 0 };
+        glm::vec2 m_mousePosition{ 0, 0 };
 
         /// <summary>
         /// Previous frame mouse cursor position for delta calculation.
@@ -328,7 +328,7 @@ namespace neu {
         /// Updated at the beginning of each Update() call before querying the
         /// new mouse position from SDL.
         /// </summary>
-        neu::vec2 m_prevMousePosition{ 0, 0 };
+        glm::vec2 m_prevMousePosition{ 0, 0 };
 
         /// <summary>
         /// Current frame mouse button state array.

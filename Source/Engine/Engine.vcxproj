@@ -211,6 +211,7 @@
     <ClCompile Include="Audio\AudioClip.cpp" />
     <ClCompile Include="Audio\AudioSystem.cpp" />
     <ClCompile Include="Components\CameraComponent.cpp" />
+    <ClCompile Include="Components\FirstPersonController.cpp" />
     <ClCompile Include="Components\LightComponent.cpp" />
     <ClCompile Include="Components\ModelRenderer.cpp" />
     <ClCompile Include="Core\File.cpp" />
@@ -228,6 +229,7 @@
     <ClCompile Include="Framework\Actor.cpp" />
     <ClCompile Include="Framework\Object.cpp" />
     <ClCompile Include="Framework\Scene.cpp" />
+    <ClCompile Include="GUI\Editor.cpp" />
     <ClCompile Include="Input\InputSystem.cpp" />
     <ClCompile Include="Math\Transform.cpp" />
     <ClCompile Include="Renderer\Material.cpp" />
@@ -244,6 +246,7 @@
     <ClInclude Include="Audio\AudioClip.h" />
     <ClInclude Include="Audio\AudioSystem.h" />
     <ClInclude Include="Components\CameraComponent.h" />
+    <ClInclude Include="Components\FirstPersonController.h" />
     <ClInclude Include="Components\LightComponent.h" />
     <ClInclude Include="Components\ModelRenderer.h" />
     <ClInclude Include="Components\RendererComponent.h" />
@@ -267,6 +270,8 @@
     <ClInclude Include="Framework\Component.h" />
     <ClInclude Include="Framework\Object.h" />
     <ClInclude Include="Framework\Scene.h" />
+    <ClInclude Include="GUI\Editor.h" />
+    <ClInclude Include="GUI\GUI.h" />
     <ClInclude Include="Input\InputSystem.h" />
     <ClInclude Include="Math\Math.h" />
     <ClInclude Include="Math\Rect.h" />
@@ -274,7 +279,6 @@
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="Physics\Collidable.h" />
-    <ClInclude Include="Renderer\GUI.h" />
     <ClInclude Include="Renderer\Material.h" />
     <ClInclude Include="Renderer\Model.h" />
     <ClInclude Include="Renderer\Program.h" />

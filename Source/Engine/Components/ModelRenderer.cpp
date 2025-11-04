@@ -28,5 +28,9 @@ void ModelRenderer::Read(const serial_data_t& value) {
 	material = Resources().Get<Material>(materialName);
 }
 
+void ModelRenderer::UpdateGui()
+{
+}
+
 }
 

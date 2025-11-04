@@ -57,6 +57,11 @@
 #include "Components/ModelRenderer.h"
 #include "Components/CameraComponent.h"
 #include "Components/LightComponent.h"
+#include "Components/FirstPersonController.h"
+
+//gui
+#include "GUI/GUI.h"
+#include "GUI/Editor.h"
 
 // third-party library
 #include <fmod.hpp>

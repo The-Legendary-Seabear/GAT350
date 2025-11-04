@@ -1,5 +1,5 @@
 #pragma once
-#include "GUI.h"
+#include "GUI/GUI.h"
 #include "Resources/Resource.h"
 #include <../glm/glm.hpp>
 

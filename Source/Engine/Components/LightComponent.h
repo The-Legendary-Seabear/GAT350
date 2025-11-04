@@ -1,7 +1,7 @@
 #pragma once
 
 namespace neu {
-	class LightComponent : public Component, GUI
+	class LightComponent : public Component
 	{
 	public:
 		CLASS_PROTOTYPE(LightComponent)
