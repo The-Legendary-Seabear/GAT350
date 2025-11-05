@@ -1,8 +1,8 @@
 {
-"program": "Shaders/basic_phong.prog",
+"program": "Shaders/basic_lit.prog",
   "baseMap": "Textures/spot_diffuse.png",
-  "baseColor": [ 1, 0, 0 ],
-"shininess": 128,
+  "baseColor": [ 1, 1, 1 ],
+"shininess": 16,
 "tiling": [1, 1],
 "offset": [0, 0]
 }

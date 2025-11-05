@@ -110,43 +110,7 @@
       "components": [
         {
           "type": "LightComponent",
-          "color": [ 0, 0, 1 ],
-          "intensity": 1,
-          "range": 30
-        }
-      ]
-    },
-    {
-      "name": "light",
-      "persistent": true,
-      "transform": {
-        "position": [ 5, 0, 0 ],
-        "rotation": [ 0, 0, 0 ],
-        "scale": [ 1, 0, 0 ]
-      },
-      "components": [
-        {
-          "type": "LightComponent",
-          "color": [ 1, 0, 0 ],
-          "intensity": 2,
-          "range": 20
-        }
-      ]
-    },
-    {
-      "name": "light",
-      "persistent": true,
-      "transform": {
-        "position": [ 5, 0, 0 ],
-        "rotation": [ 0, 0, 0 ],
-        "scale": [ 1, 0, 0 ]
-      },
-      "components": [
-        {
-          "type": "LightComponent",
-          "color": [ 1, 0, 1 ],
-          "intensity": 2,
-          "range": 20
+          "color": [ 1, 1, 1 ]
         }
       ]
     }
