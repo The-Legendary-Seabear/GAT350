@@ -11,71 +11,7 @@
       "components": [
         {
           "type": "ModelRenderer",
-          "model": "Models/Skull_Jaw.fbx",
-          "material": "Materials/spot.mat"
-        }
-      ]
-    },
-    {
-      "name": "ball",
-      "persistent": true,
-      "transform": {
-        "position": [ -1, -1, 0 ],
-        "rotation": [ 0, 180, 0 ],
-        "scale": [ 1, 1, 1 ]
-      },
-      "components": [
-        {
-          "type": "ModelRenderer",
-          "model": "Models/Scythe.fbx",
-          "material": "Materials/spot.mat"
-        }
-      ]
-    },
-    {
-      "name": "ball",
-      "persistent": true,
-      "transform": {
-        "position": [ 1, -2, 0 ],
-        "rotation": [ 0, 180, 0 ],
-        "scale": [ 1, 1, 1 ]
-      },
-      "components": [
-        {
-          "type": "ModelRenderer",
-          "model": "Models/Black_Candles_Big.fbx",
-          "material": "Materials/spot.mat"
-        }
-      ]
-    },
-    {
-      "name": "ball",
-      "persistent": true,
-      "transform": {
-        "position": [ 2, 0, 1 ],
-        "rotation": [ 0, 180, 0 ],
-        "scale": [ 1, 1, 1 ]
-      },
-      "components": [
-        {
-          "type": "ModelRenderer",
-          "model": "Models/Sickle.fbx",
-          "material": "Materials/spot.mat"
-        }
-      ]
-    },
-    {
-      "name": "ball",
-      "persistent": true,
-      "transform": {
-        "position": [ 0, 1, 1 ],
-        "rotation": [ 0, 180, 0 ],
-        "scale": [ 1, 1, 1 ]
-      },
-      "components": [
-        {
-          "type": "ModelRenderer",
-          "model": "Models/Bone_Pile1.fbx",
+          "model": "Models/spot.obj",
           "material": "Materials/spot.mat"
         }
       ]
