@@ -71,6 +71,12 @@
     <None Include="..\..\Build\Assets\Scenes\scene02.json">
       <Filter>Assets\Scenes</Filter>
     </None>
+    <None Include="..\..\Build\Assets\Materials\crate.mat">
+      <Filter>Assets\Materials</Filter>
+    </None>
+    <None Include="..\..\Build\Assets\Materials\lava.mat">
+      <Filter>Assets\Materials</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\Build\Assets\Textures\beast.png">

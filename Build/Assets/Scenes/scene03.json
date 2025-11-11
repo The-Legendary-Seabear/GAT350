@@ -1,7 +1,7 @@
 {
   "actors": [
     {
-      "name": "crate",
+      "name": "ball",
       "persistent": true,
       "transform": {
         "position": [ 0, 0, 0 ],
@@ -11,8 +11,8 @@
       "components": [
         {
           "type": "ModelRenderer",
-          "model": "Models/cube.obj",
-          "material": "Materials/crate.mat"
+          "model": "Models/spot.obj",
+          "material": "Materials/spot.mat"
         }
       ]
     },
@@ -46,9 +46,43 @@
       "components": [
         {
           "type": "LightComponent",
-          "color": [ 1, 1, 1 ],
+          "color": [ 0, 0, 1 ],
           "intensity": 1,
           "range": 30
+        }
+      ]
+    },
+    {
+      "name": "light",
+      "persistent": true,
+      "transform": {
+        "position": [ 5, 0, 0 ],
+        "rotation": [ 0, 0, 0 ],
+        "scale": [ 1, 0, 0 ]
+      },
+      "components": [
+        {
+          "type": "LightComponent",
+          "color": [ 1, 0, 0 ],
+          "intensity": 2,
+          "range": 20
+        }
+      ]
+    },
+    {
+      "name": "light",
+      "persistent": true,
+      "transform": {
+        "position": [ 5, 0, 0 ],
+        "rotation": [ 0, 0, 0 ],
+        "scale": [ 1, 0, 0 ]
+      },
+      "components": [
+        {
+          "type": "LightComponent",
+          "color": [ 1, 0, 1 ],
+          "intensity": 2,
+          "range": 20
         }
       ]
     }

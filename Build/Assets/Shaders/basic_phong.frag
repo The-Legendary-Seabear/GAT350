@@ -5,6 +5,10 @@
 #define DIRECTIONAL 1
 #define SPOT 2
 
+#define BASE_MAP (1 << 0)
+#define	SPECULAR_MAP (1 << 1)
+#define	EMISSIVE_MAP (1 << 2)
+
 in VS_OUT
 {
 vec2 texcoord;
@@ -34,18 +38,20 @@ float outerCutoff;
 
 uniform struct Material 
 {
-sampler2D baseMap;
 vec3 baseColor;
-
-	//sampler2D texture;
-	float shininess;
-	vec2 tiling;
-	vec2 offset;
+vec3 emissiveColor;
+float shininess;
+vec2 tiling;
+vec2 offset;
+uint parameters;
 };
 
 uniform int u_numLights = 1;
 uniform Light u_lights[MAX_LIGHTS];
 uniform Material u_material;
+uniform sampler2D u_baseMap;
+uniform sampler2D u_specularMap;
+uniform sampler2D u_emissiveMap;
 
 
 float calculateAttenuation(in float light_distance, in float range) {
@@ -55,7 +61,7 @@ float calculateAttenuation(in float light_distance, in float range) {
 	return pow(attenuation, 2);
 }
 
-vec3 calculateLight(in Light light,in vec3 position, in vec3 normal)
+vec3 calculateLight(in Light light,in vec3 position, in vec3 normal, in float specularMask)
 {
 vec3 light_dir;
 float attenuation;
@@ -99,7 +105,7 @@ vec3 view_dir = normalize(-position);
 vec3 halfway_dir = normalize(light_dir + view_dir);
 float NdotH = max(dot(fs_in.normal, halfway_dir), 0);
 NdotH = pow(NdotH, u_material.shininess);
-vec3 specular = vec3(NdotH);
+vec3 specular = vec3(NdotH) * specularMask;
 
 return (diffuse + specular) * light.intensity * attenuation;
 }
@@ -107,12 +113,18 @@ return (diffuse + specular) * light.intensity * attenuation;
 //uniform sampler2D u_texture;
 void main()
 {
+float specularMask = ((u_material.parameters & SPECULAR_MAP) != 0u)
+  ? texture(u_specularMap, fs_in.texcoord).r
+  : 1;
+
 vec3 color = u_ambient_light;
 	for (int i = 0; i < u_numLights; i++) {
-	color += calculateLight(u_lights[i], fs_in.position, fs_in.normal);
+	color += calculateLight(u_lights[i], fs_in.position, fs_in.normal, specularMask);
 	}
-	f_color = texture(u_material.baseMap, fs_in.texcoord) * vec4(color, 1);
 
-//vec3 color = calculateLight(fs_in.position, fs_in.normal);
-//	f_color = texture(u_material.baseMap, fs_in.texcoord) * vec4(color, 1);
+	vec4 emissive = ((u_material.parameters & EMISSIVE_MAP) != 0u)
+  ? texture(u_emissiveMap, fs_in.texcoord) * vec4(u_material.emissiveColor, 1)
+  : vec4(u_material.emissiveColor, 1);
+
+	f_color = texture(u_baseMap, fs_in.texcoord) * vec4(color, 1) + emissive;
 }

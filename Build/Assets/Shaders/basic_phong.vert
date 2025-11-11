@@ -13,13 +13,12 @@ vec3 normal;
 
 uniform struct Material 
 {
-sampler2D baseMap;
 vec3 baseColor;
-
-	//sampler2D texture;
-	float shininess;
-	vec2 tiling;
-	vec2 offset;
+vec3 emissiveColor;
+float shininess;
+vec2 tiling;
+vec2 offset;
+uint parameters;
 } u_material;
 
 //flat out vec3 v_color;
