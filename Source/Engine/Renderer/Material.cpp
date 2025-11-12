@@ -65,6 +65,13 @@ namespace neu {
 			parameters = (Parameters)((uint32_t)parameters | (uint32_t)Parameters::EmissiveMap);
 		}
 
+		if (normalMap) {
+			normalMap->SetActive(GL_TEXTURE3);
+			normalMap->Bind();
+			program->SetUniform("u_normalMap", 3);
+			parameters = (Parameters)((uint32_t)parameters | (uint32_t)Parameters::NormalMap);
+		}
+
 		program->SetUniform("u_material.baseColor", baseColor);
 		program->SetUniform("u_material.emissiveColor", emissiveColor);
 		program->SetUniform("u_material.shininess", shininess);
@@ -72,6 +79,7 @@ namespace neu {
 		program->SetUniform("u_material.offset", offset);
 		program->SetUniform("u_material.parameters", (uint32_t)parameters);
 	}
+
 	void Material::UpdateGui() {
 		if (ImGui::CollapsingHeader("Material", ImGuiTreeNodeFlags_DefaultOpen)) {
 			ImGui::Text("Name: %s", name.c_str());

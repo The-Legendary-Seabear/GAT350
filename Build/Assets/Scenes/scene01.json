@@ -39,7 +39,7 @@
       "name": "light",
       "persistent": true,
       "transform": {
-        "position": [ 5, 5, 0 ],
+        "position": [ 5, 5, 5 ],
         "rotation": [ 0, 0, 0 ],
         "scale": [ 1, 1, 1 ]
       },
@@ -47,7 +47,7 @@
         {
           "type": "LightComponent",
           "color": [ 1, 1, 1 ],
-          "intensity": 1,
+          "intensity": 4,
           "range": 30
         }
       ]

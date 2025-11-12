@@ -2,7 +2,6 @@
 "program": "Shaders/basic_phong.prog",
   "baseMap": "Textures/lava_base.png",
   "baseColor": [ 1, 1, 1 ],
-  //"specularMap": "Textures/space_crate_specular.png",
   "emissiveMap": "Textures/lava_emissive.png",
   "emissiveColor": [ 1, 1, 1 ],
 "shininess": 16,
