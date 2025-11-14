@@ -61,7 +61,7 @@ vec3 calculateNormal()
 	// generate the normals from the normal map
 	vec3 normal = texture(u_normalMap, fs_in.texcoord).rgb;
 	// convert rgb normal (0 <-> 1) to xyx (-1 <-> 1)
-	normal = normalize(normal);
+	normal = normalize(normal * 2.0 - 1.0);
 	// transform normals to model view space
 	normal = normalize(fs_in.tbn * normal);
 
@@ -108,7 +108,7 @@ switch (light.type) {
 }
 
 // diffuse lighting
-float NdotL = max(dot(light_dir, fs_in.normal), 0);
+float NdotL = max(dot(light_dir, normal), 0);
 vec3 diffuse = light.color * u_material.baseColor * NdotL ;
 
 
@@ -118,7 +118,7 @@ vec3 view_dir = normalize(-position);
 
 //blinn phong
 vec3 halfway_dir = normalize(light_dir + view_dir);
-float NdotH = max(dot(fs_in.normal, halfway_dir), 0);
+float NdotH = max(dot(normal, halfway_dir), 0);
 NdotH = pow(NdotH, u_material.shininess);
 vec3 specular = vec3(NdotH) * specularMask;
 

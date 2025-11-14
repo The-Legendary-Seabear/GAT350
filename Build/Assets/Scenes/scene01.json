@@ -1,7 +1,25 @@
 {
   "actors": [
     {
-      "name": "crate",
+      "name": "skybox",
+      "persistent": true,
+      "transform": {
+        "position": [ 0, 0, 0 ],
+        "rotation": [ 0, 0, 0 ],
+        "scale": [ 1, 1, 1 ]
+      },
+      "components": [
+        {
+          "type": "ModelRenderer",
+          "model": "Models/cube.obj",
+          "material": "Materials/skybox.mat",
+          "enableDepth": false,
+          "cullFace": "front"
+        }
+      ]
+    },
+    {
+      "name": "spot",
       "persistent": true,
       "transform": {
         "position": [ 0, 0, 0 ],
@@ -11,8 +29,44 @@
       "components": [
         {
           "type": "ModelRenderer",
+          "model": "Models/spot.obj",
+          "material": "Materials/refraction.mat"
+        },
+        {
+          "type": "RotationComponent",
+          "rotate": [ 0, 90, 0 ]
+        }
+      ]
+    },
+    {
+      "name": "crate",
+      "persistent": true,
+      "transform": {
+        "position": [ 0, 2, 0 ],
+        "rotation": [ 0, 180, 0 ],
+        "scale": [ 1, 1, 1 ]
+      },
+      "components": [
+        {
+          "type": "ModelRenderer",
           "model": "Models/cube.obj",
           "material": "Materials/crate.mat"
+        }
+      ]
+    },
+    {
+      "name": "rocks",
+      "persistent": true,
+      "transform": {
+        "position": [ 0, -1, 0 ],
+        "rotation": [ 0, 180, 0 ],
+        "scale": [ 1, 1, 1 ]
+      },
+      "components": [
+        {
+          "type": "ModelRenderer",
+          "model": "Models/plane.obj",
+          "material": "Materials/rocks.mat"
         }
       ]
     },
@@ -39,7 +93,7 @@
       "name": "light",
       "persistent": true,
       "transform": {
-        "position": [ 5, 5, 5 ],
+        "position": [ 5, 15, 5 ],
         "rotation": [ 0, 0, 0 ],
         "scale": [ 1, 1, 1 ]
       },

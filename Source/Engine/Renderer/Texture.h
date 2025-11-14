@@ -41,8 +41,8 @@ namespace neu {
 		friend class Renderer;
 
 		GLuint m_texture = 0;
-	private:
 		GLenum m_target = GL_TEXTURE_2D;
+	private:
 
 		// The dimensions of the texture in pixels
 		vec2 m_size{ 0, 0 };

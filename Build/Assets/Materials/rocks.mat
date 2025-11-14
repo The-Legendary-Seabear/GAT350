@@ -1,0 +1,8 @@
+{
+  "program": "Shaders/basic_phong.prog",
+  "baseMap": "Textures/rocks_base.jpg",
+  "baseColor": [ 1, 1, 1 ],
+  "shininess": 128,
+  "tiling": [ 5, 5 ],
+  "offset": [ 0, 0 ]
+}

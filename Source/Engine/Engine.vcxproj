@@ -214,6 +214,7 @@
     <ClCompile Include="Components\FirstPersonController.cpp" />
     <ClCompile Include="Components\LightComponent.cpp" />
     <ClCompile Include="Components\ModelRenderer.cpp" />
+    <ClCompile Include="Components\RotationComponent.cpp" />
     <ClCompile Include="Core\File.cpp" />
     <ClCompile Include="Core\Json.cpp" />
     <ClCompile Include="Core\Time.cpp" />
@@ -232,6 +233,7 @@
     <ClCompile Include="GUI\Editor.cpp" />
     <ClCompile Include="Input\InputSystem.cpp" />
     <ClCompile Include="Math\Transform.cpp" />
+    <ClCompile Include="Renderer\Cubemap.cpp" />
     <ClCompile Include="Renderer\Material.cpp" />
     <ClCompile Include="Renderer\Model.cpp" />
     <ClCompile Include="Renderer\Program.cpp" />
@@ -250,6 +252,7 @@
     <ClInclude Include="Components\LightComponent.h" />
     <ClInclude Include="Components\ModelRenderer.h" />
     <ClInclude Include="Components\RendererComponent.h" />
+    <ClInclude Include="Components\RotationComponent.h" />
     <ClInclude Include="Core\Assert.h" />
     <ClInclude Include="Core\Factory.h" />
     <ClInclude Include="Core\File.h" />
@@ -279,6 +282,7 @@
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="Physics\Collidable.h" />
+    <ClInclude Include="Renderer\Cubemap.h" />
     <ClInclude Include="Renderer\Material.h" />
     <ClInclude Include="Renderer\Model.h" />
     <ClInclude Include="Renderer\Program.h" />

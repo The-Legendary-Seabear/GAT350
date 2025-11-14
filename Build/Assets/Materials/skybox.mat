@@ -1,0 +1,4 @@
+{
+	"program": "Shaders/skybox.prog",
+	"cubeMap": "Textures/night_cubemap/posx.jpg Textures/night_cubemap/negx.jpg Textures/night_cubemap/posy.jpg Textures/night_cubemap/negy.jpg Textures/night_cubemap/posz.jpg Textures/night_cubemap/negz.jpg"
+}

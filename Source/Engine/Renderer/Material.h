@@ -15,7 +15,8 @@ namespace neu {
 			BaseMap		= (1 << 0),
 			SpecularMap	= (1 << 1),
 			EmissiveMap	= (1 << 2),
-			NormalMap	= (1 << 3)
+			NormalMap	= (1 << 3),
+			CubeMap		= (1 << 4)
 		};
 
 	public:
@@ -40,8 +41,11 @@ namespace neu {
 		glm::vec3 emissiveColor{ 0, 0, 0 };
 
 		res_t<Texture> normalMap;
+		res_t<Texture> cubeMap;
+
+		float ior{ 1.3f };
 		
-		Parameters parameters;
+		Parameters parameters = Parameters::None;
 	};
 }
 
