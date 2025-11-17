@@ -19,6 +19,8 @@ namespace neu
 
 		void SetAttribute(GLuint index, GLint size, GLsizei stride, GLuint offset);
 
+		void UpdateGui() override {}
+
 	protected:
 		// vertex array
 		GLuint m_vao = 0;   // vertex array object

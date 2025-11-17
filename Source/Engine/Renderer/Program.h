@@ -30,6 +30,8 @@ namespace neu {
 
 		void SetUniform(const std::string& name, const glm::mat3& value);
 		void SetUniform(const std::string& name, const glm::mat4& value);
+
+		void UpdateGui() override {}
  
 	private:
 		GLint GetUniformLocation(const std::string& name);

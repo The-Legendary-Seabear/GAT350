@@ -8,7 +8,7 @@ namespace neu {
     /// cached, and managed by the ResourceManager. All specific resource types
     /// (textures, sounds, models, etc.) should inherit from this class.
     /// </summary>
-    class Resource {
+    class Resource : public GUI{
     public:
         /// <summary>
         /// Default constructor for resource objects.

@@ -30,6 +30,21 @@ void Editor::UpdateGui(Scene& scene) {
     }
     ImGui::End();
 
+    //ASSETS
+    ImGui::Begin("Assets");
+    auto resources = Resources().GetByType();
+    index = 0;
+    for (auto resource : resources) {
+        ImGui::PushID(index++);
+        if (ImGui::Selectable(resource->name.c_str(), resource == m_selected))
+        {
+            m_selected = resource;
+        }
+        ImGui::PopID();
+    }
+
+    ImGui::End();
+
     //Inspector
     ImGui::Begin("Inspector");
     if (m_selected) {
@@ -38,6 +53,10 @@ void Editor::UpdateGui(Scene& scene) {
     ImGui::End();
 
     ImGui::PopStyleColor();
+}
+
+void Editor::ShowTexture(const Texture& texture, float width, float height) {
+    ImGui::Image((ImTextureID)texture.m_texture, ImVec2(width, height));
 }
 
 }

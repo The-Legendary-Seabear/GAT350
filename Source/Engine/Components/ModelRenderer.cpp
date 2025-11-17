@@ -42,6 +42,14 @@ void ModelRenderer::Read(const serial_data_t& value) {
 
 void ModelRenderer::UpdateGui()
 {
+	if (model) { 
+		ImGui::Text("Model: %s", model->name.c_str()); 
+		Editor::GetDialogResource<Model>(model, "ModelDialog", "Open model", "Model file (*.obj;*.fbx){.obj,.fbx},.*");
+	}
+	if (material) { 
+		ImGui::Text("Material: %s", material->name.c_str()); 
+		Editor::GetDialogResource<Material>(material, "MaterialDialog", "Open material", "Material file (*.mat){.mat},.*");
+	}
 }
 
 }

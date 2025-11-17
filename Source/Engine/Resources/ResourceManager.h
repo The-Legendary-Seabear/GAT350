@@ -65,6 +65,10 @@ namespace neu {
             requires std::derived_from<T, Resource>
         res_t<T> GetWithID(const std::string& id, const std::string& name, Args&& ... args);
 
+        template<typename T = Resource>
+            requires std::derived_from<T, Resource>
+        std::vector <T*> GetByType();
+
     private:
         /// <summary>
         /// Friend declaration to allow Singleton base class access to private constructor
@@ -100,6 +104,9 @@ namespace neu {
         return GetWithID<T>(name, name, std::forward<Args>(args)...);
     }
 
+
+    
+
     /// <summary>
     /// Template implementation for GetWithID() method.
     /// This is the core resource loading and caching logic.
@@ -122,6 +129,9 @@ namespace neu {
                 LOG_ERROR("Resource type mismatch: {}", key);
                 return res_t<T>();  // Return empty shared_ptr on type mismatch
             }
+
+            resource->name = key;
+            m_resources[key] = resource;
 
             // Return the cached resource with correct type
             return resource;
@@ -155,4 +165,20 @@ namespace neu {
     /// </summary>
     /// <returns>Reference to the ResourceManager singleton instance</returns>
     inline ResourceManager& Resources() { return ResourceManager::Instance(); }
+
+    template<typename T>
+        requires std::derived_from<T, Resource>
+    inline std::vector<T*> GetByType()
+    {
+        std::vector<T*> results;
+
+        for (auto& resource : m_resources) {
+            auto result = dynamic_cast<T*>(resource.second.get());
+            if (result) {
+                results.push_back(result);
+            }
+        }
+
+        return results;
+    }
 }

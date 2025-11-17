@@ -42,6 +42,8 @@ namespace neu {
 
 		GLuint m_texture = 0;
 		GLenum m_target = GL_TEXTURE_2D;
+
+		void UpdateGui();
 	private:
 
 		// The dimensions of the texture in pixels
