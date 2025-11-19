@@ -1,0 +1,8 @@
+{
+	"program" : "shaders/unlit.prog",
+	"baseMap": "renderTexture",
+	"baseColor": [1, 1, 1],
+	"shininess" : 128,
+	"tiling" : [ 1, 1 ],
+	"offset" : [ 0, 0 ]	
+}

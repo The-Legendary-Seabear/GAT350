@@ -57,6 +57,8 @@ namespace neu::file {
     /// <returns>The filename component of the specified path as a string</returns>
     std::string GetFilename(const std::string& path);
 
+    std::string GetRelativePath(const std::string& path);
+
     /// <summary>
     /// Checks whether a file or directory exists at the specified path.
     /// This function works for both files and directories and follows symbolic links.

@@ -59,6 +59,12 @@ namespace neu::file {
         return p.filename().string();
     }
 
+    std::string GetRelativePath(const std::string& path)
+    {
+
+        return std::filesystem::relative(path).string();
+    }
+
     /// <summary>
     /// Checks whether a file or directory exists at the specified path.
     /// Uses error-safe filesystem operations to check existence without throwing exceptions.

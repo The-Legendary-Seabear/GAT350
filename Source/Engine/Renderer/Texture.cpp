@@ -38,8 +38,8 @@ namespace neu {
         GLenum internalFormat = (channels == 4) ? GL_RGBA8 : GL_RGB8;
         GLenum format = (channels == 4) ? GL_RGBA : GL_RGB;
 
-        m_size.x = (float)surface->w;
-		m_size.y = (float)surface->h;
+        m_size.x = surface->w;
+		m_size.y = surface->h;
 
         glGenTextures(1, &m_texture);
         glBindTexture(m_target, m_texture);
@@ -62,8 +62,8 @@ namespace neu {
 
     void Texture::UpdateGui() {
         ImGui::Text("Name: %s", file::GetFilename(name).c_str());
-        ImGui::Text("Size: %dx%d", (int)m_size.x, (int)m_size.y);
-        Editor::ShowTexture(*this, 64, 64);
+        ImGui::Text("Size: %dx%d", m_size.x, m_size.y);
+        Editor::ShowTexture(*this, 128, 128);
 
 
     }

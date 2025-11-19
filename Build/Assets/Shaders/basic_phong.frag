@@ -145,5 +145,6 @@ vec3 color = u_ambient_light;
   ? texture(u_emissiveMap, fs_in.texcoord) * vec4(u_material.emissiveColor, 1)
   : vec4(u_material.emissiveColor, 1);
 
-	f_color = texture(u_baseMap, fs_in.texcoord) * vec4(color, 1) + emissive;
+	//f_color = texture(u_baseMap, fs_in.texcoord) * vec4(color, 1) + emissive;
+	f_color = vec4(gl_FragCoord.z);
 }

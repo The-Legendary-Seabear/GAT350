@@ -1,0 +1,9 @@
+{
+	"program": "shaders/lit_phong.prog",
+	"baseMap": "textures/ogre_base.bmp",
+	"normalMap": "textures/ogre_normal.bmp",
+	"baseColor": [ 1, 1, 1 ],
+	"shininess": 128,
+	"tiling": [ 1, 1 ],
+	"offset": [ 0, 0 ]
+}
