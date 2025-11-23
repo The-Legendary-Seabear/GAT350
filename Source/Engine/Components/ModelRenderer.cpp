@@ -67,6 +67,7 @@ void ModelRenderer::UpdateGui()
 		ImGui::Text("Material: %s", material->name.c_str()); 
 		Editor::GetDialogResource<Material>(material, "MaterialDialog", "Open material", "Material file (*.mat){.mat},.*");
 	}
+	
 }
 
 }

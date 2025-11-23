@@ -2,29 +2,7 @@
 #include "Renderer/Renderer.h"
 
 namespace neu {
-    /// <summary>
-    /// Updates all actors in the scene by advancing their state based on the elapsed time.
-    /// 
-    /// This method implements the main update loop for the scene, processing all active
-    /// actors and performing cleanup of destroyed actors. The update process respects
-    /// the active state of actors to allow for selective processing.
-    /// 
-    /// Update algorithm:
-    /// 1. Iterate through all actors in the scene
-    /// 2. Update only those actors marked as active
-    /// 3. Remove actors marked as destroyed after all updates complete
-    /// 
-    /// The two-phase approach (update then cleanup) ensures that:
-    /// - All active actors get a chance to update before any are removed
-    /// - Actors can mark themselves or others for destruction during update
-    /// - Container modification happens after iteration to avoid iterator invalidation
-    /// 
-    /// Performance optimizations:
-    /// - Inactive actors are skipped entirely
-    /// - Destruction cleanup uses efficient std::erase_if
-    /// - Single-pass destruction removes all destroyed actors at once
-    /// </summary>
-    /// <param name="dt">The time elapsed since the last update, in seconds.</param>
+    
     void Scene::Update(float dt) {
         // PHASE 1: Update all active actors
         // Loop through every actor in the scene container
@@ -58,110 +36,90 @@ namespace neu {
     void Scene::UpdateGui()
     {
         ImGui::ColorEdit3("Ambient", glm::value_ptr(m_ambientLight));
+		ImGui::Checkbox("Post Process", &m_postprocess);
     }
 
-    /// <summary>
-    /// Draws all actors in the scene using the specified renderer.
-    /// 
-    /// This method coordinates the rendering phase for all visible actors in the scene.
-    /// Only active actors participate in rendering, allowing for dynamic visibility
-    /// control without removing actors from the scene.
-    /// 
-    /// Rendering process:
-    /// 1. Iterate through all actors in the scene
-    /// 2. Call Draw() on each active actor
-    /// 3. Actors handle their own rendering logic and resource management
-    /// 
-    /// The scene serves as a rendering coordinator, ensuring all actors have
-    /// access to the renderer while not imposing any specific rendering order
-    /// or techniques. Individual actors are responsible for their own drawing logic.
-    /// 
-    /// Performance considerations:
-    /// - Inactive actors are skipped for rendering efficiency
-    /// - No depth sorting or rendering optimization is performed at scene level
-    /// - Actors may implement their own culling or LOD systems
-    /// </summary>
-    /// <param name="renderer">The renderer used to draw the actors.</param>
+   
     void Scene::Draw(Renderer& renderer) {
         //Get light
-        std::vector<LightComponent*> lights;
-        for (auto& actor : m_actors) {
-            if (!actor->active) continue;
+        auto lights = GetActorComponents<LightComponent>();
 
-            auto light = actor->GetComponent<LightComponent>();
-            if (light && light->active) {
-                lights.push_back(light);
-            }
-        }
+
         //Get camera
-        CameraComponent* camera = nullptr;
-        for (auto& actor : m_actors) {
-            if (!actor->active) continue;
+        auto cameras = GetActorComponents<CameraComponent>();
 
-            camera = actor->GetComponent<CameraComponent>();
-            if (camera && camera->active) break;
-        }
-
-        if (!camera) {
+        if (cameras.empty()) {
             LOG_WARNING("No camera active in scene");
                 return;
         }
 
-        //get programs
-        std::set<Program*> programs;
+        // get programs
+        std::set<Program*> programSet;
         for (auto& actor : m_actors) {
             ModelRenderer* model = actor->GetComponent<ModelRenderer>();
             if (!model || !model->active) continue;
 
             if (model->material && model->material->program) {
-                programs.insert(model->material->program.get());
+                programSet.insert(model->material->program.get());
             }
         }
 
+        std::vector<Program*> programs(programSet.begin(), programSet.end());
+
+        for (auto& camera : cameras) {
+            PostProcessComponent* postprocessComponent = camera->owner->GetComponent<PostProcessComponent>();
+            bool renderToTexture = camera->outputTexture && (!postprocessComponent || (postprocessComponent && m_postprocess));
+
+            if (renderToTexture) {
+                camera->outputTexture->BindFramebuffer();
+                glViewport(0, 0, camera->outputTexture->m_size.x, camera->outputTexture->m_size.y);
+            }
+            camera->Clear();
+            DrawPass(renderer, programs, lights, camera);
+            if (renderToTexture) {
+                camera->outputTexture->UnbindFramebuffer();
+                glViewport(0, 0, renderer.GetWidth(), renderer.GetHeight());
+            }
+
+            if (renderToTexture && postprocessComponent) {
+                auto postProcessProgram = Resources().Get<Program>("Shaders/postprocess.prog");
+                postProcessProgram->Use();
+				postprocessComponent->Apply(*postProcessProgram);
+                camera->outputTexture->Bind();
+                auto actor = GetActorByName("postprocess");
+                actor->Draw(renderer);
+            }
+        }
+    }
+
+    void Scene::DrawPass(Renderer& renderer,
+        std::vector<Program*>& programs,
+        std::vector<LightComponent*>& lights,
+        CameraComponent* camera)
+    {
+        //set shaders
         for (auto& program : programs) {
             program->Use();
             program->SetUniform("u_ambient_light", m_ambientLight);
-            program->SetUniform("u_numLights", static_cast<int>(lights.size()));
+            program->SetUniform("u_numLights", (int)lights.size());
             camera->SetProgram(*program);
 
             //set lights
             int index = 0;
             for (auto light : lights) {
                 std::string lightName = "u_lights[" + std::to_string(index++) + "]";
-                if (light) light->SetProgram(*program, lightName, camera->view);
+                light->SetProgram(*program, lightName, camera->view);
             }
         }
 
-        // Iterate through all actors in the scene
+        // Draw through all actors in the scene
         for (auto& actor : m_actors) {
-            // Only render actors that are marked as active
-            // This parallels the Update() logic for consistency
             if (actor->active) {
-                // Pass the renderer to each actor
-                // Each actor is responsible for its own drawing implementation
                 actor->Draw(renderer);
             }
         }
     }
-
-    /// <summary>
-    /// Adds an actor to the scene by transferring ownership of the actor.
-    /// 
-    /// This method incorporates a new actor into the scene, setting up the
-    /// bidirectional relationship between the actor and scene, and optionally
-    /// initializing the actor immediately.
-    /// 
-    /// Integration process:
-    /// 1. Set the actor's scene pointer to establish parent relationship
-    /// 2. Optionally call Start() to initialize the actor
-    /// 3. Transfer ownership to the scene's actor container
-    /// 
-    /// The scene pointer enables actors to access scene-wide functionality
-    /// and query other actors. The start parameter allows for batch actor
-    /// addition without immediate initialization (useful during scene loading).
-    /// </summary>
-    /// <param name="actor">A unique pointer to the actor to be added. Ownership of the actor is transferred to the scene.</param>
-    /// <param name="start">Whether to immediately call Start() on the actor for initialization</param>
+   
     void Scene::AddActor(std::unique_ptr<Actor> actor, bool start) {
         // Validate that we're not trying to add a null pointer
         // ASSERT_MSG will help catch bugs during development
@@ -181,24 +139,7 @@ namespace neu {
         m_actors.push_back(std::move(actor));
     }
 
-    /// <summary>
-    /// Removes actors from the scene based on persistence flags.
-    /// 
-    /// This method provides selective actor removal, allowing certain actors
-    /// to persist across scene changes while removing others. This is useful
-    /// for maintaining continuity of important game objects across level transitions.
-    /// 
-    /// Removal logic:
-    /// - Non-persistent actors are always removed
-    /// - Persistent actors are only removed if force=true
-    /// - Uses iterator-based removal for safe container modification
-    /// 
-    /// Common use cases:
-    /// - Scene transitions where some objects should carry over
-    /// - Level resets requiring complete cleanup
-    /// - Gameplay events that clear specific actor categories
-    /// </summary>
-    /// <param name="force">If true, removes all actors regardless of persistence; if false, preserves persistent actors</param>
+  
     void Scene::RemoveAllActors(bool force) {
         // Use manual iterator loop for conditional removal
         // std::erase_if can't be used here due to complex removal logic
@@ -247,23 +188,7 @@ namespace neu {
         m_actors.clear();
     }
 
-    /// <summary>
-    /// Loads a complete scene from a named configuration file.
-    /// 
-    /// This method provides the primary entry point for data-driven scene creation,
-    /// loading serialized scene data and preparing it for immediate gameplay use.
-    /// 
-    /// Loading process:
-    /// 1. Load and parse the serialized scene document
-    /// 2. Process scene data through Read() method (prototypes and actors)
-    /// 3. Initialize all loaded actors by calling their Start() methods
-    /// 4. Return success/failure status for error handling
-    /// 
-    /// The method handles complete scene setup, including prototype registration
-    /// and actor initialization, making the scene immediately ready for use.
-    /// </summary>
-    /// <param name="sceneName">Name/path of the scene file to load</param>
-    /// <returns>True if the scene loaded successfully, false on any error</returns>
+    
     bool Scene::Load(const std::string& sceneName) {
         // Create a document to hold the parsed serialized data
         neu::serial::document_t document;
@@ -284,28 +209,13 @@ namespace neu {
         return true;
     }
 
-    /// <summary>
-    /// Deserializes scene data from serialized format.
-    /// 
-    /// This method processes serialized scene configuration to populate the scene
-    /// with prototypes and actors. It handles two main sections of scene data:
-    /// prototypes (reusable actor templates) and actors (immediate scene content).
-    /// 
-    /// Processing order:
-    /// 1. Load base Object properties (name, active state)
-    /// 2. Process prototypes and register them with the Factory
-    /// 3. Process actors and add them to the scene
-    /// 
-    /// The method integrates with the Factory system to enable both direct actor
-    /// creation and prototype-based instantiation, providing flexible scene
-    /// composition strategies.
-    /// </summary>
-    /// <param name="value">Serialized data containing scene configuration</param>
+   
     void Scene::Read(const serial_data_t& value) {
         // Load base Object properties first (name, active, etc.)
         // This calls the parent class's Read() implementation
         //Object::Read(value);
-
+		SERIAL_READ_NAME(value, "ambient_light", m_ambientLight);
+        SERIAL_READ_NAME(value, "postprocess", m_postprocess);
         // SECTION 1: Process prototype definitions
         // Check if the serialized data contains a "prototypes" section
         if (SERIAL_CONTAINS(value, prototypes)) {

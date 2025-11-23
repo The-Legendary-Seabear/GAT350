@@ -211,9 +211,11 @@
     <None Include="..\..\Build\Assets\Materials\crate.mat" />
     <None Include="..\..\Build\Assets\Materials\halloween.mat" />
     <None Include="..\..\Build\Assets\Materials\lava.mat" />
+    <None Include="..\..\Build\Assets\Materials\postprocess.mat" />
     <None Include="..\..\Build\Assets\Materials\reflection.mat" />
     <None Include="..\..\Build\Assets\Materials\refraction.mat" />
     <None Include="..\..\Build\Assets\Materials\rocks.mat" />
+    <None Include="..\..\Build\Assets\Materials\rtt.mat" />
     <None Include="..\..\Build\Assets\Materials\skybox.mat" />
     <None Include="..\..\Build\Assets\Materials\spot.mat" />
     <None Include="..\..\Build\Assets\Scenes\scene01.json" />
@@ -227,6 +229,9 @@
     <None Include="..\..\Build\Assets\Shaders\basic_phong.prog" />
     <None Include="..\..\Build\Assets\Shaders\basic_phong.vert" />
     <None Include="..\..\Build\Assets\Shaders\cubemap.frag" />
+    <None Include="..\..\Build\Assets\Shaders\postprocess.frag" />
+    <None Include="..\..\Build\Assets\Shaders\postprocess.prog" />
+    <None Include="..\..\Build\Assets\Shaders\postprocess.vert" />
     <None Include="..\..\Build\Assets\Shaders\reflection.prog" />
     <None Include="..\..\Build\Assets\Shaders\reflection.vert" />
     <None Include="..\..\Build\Assets\Shaders\refraction.prog" />

@@ -24,6 +24,7 @@ namespace neu {
     bool Texture::Load(const std::string& filename) {
         // Load image onto a CPU-side surface
         // SDL_image supports various formats: PNG, JPG, BMP, GIF, etc.
+        LOG_INFO("Attempting to load texture from path: {}", filename);
         SDL_Surface* surface = IMG_Load(filename.c_str());
         if (!surface) {
             LOG_ERROR("Could not load image: {}", filename);
