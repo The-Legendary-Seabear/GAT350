@@ -138,7 +138,7 @@ namespace neu {
         }
 
         resource->name = key;
-        m_resources[name] = resource;
+        m_resources[key] = resource;
 
         return true;
     }

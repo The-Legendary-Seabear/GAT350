@@ -24,6 +24,18 @@ void ModelRenderer::Draw(Renderer& renderer)
 	}
 }
 
+void ModelRenderer::Draw(Renderer& renderer, Program& program) {
+	program.SetUniform("u_model", owner->transform.GetMatrix());
+	
+	glDepthMask(enableDepth);
+	glCullFace(cullFace);
+
+	if (model) {
+		model->Draw(GL_TRIANGLES);
+
+	}
+}
+
 void ModelRenderer::Read(const serial_data_t& value) {
 	Object::Read(value);
 
@@ -58,16 +70,6 @@ void ModelRenderer::UpdateGui()
 	ImGui::Text("Material: %s", text.c_str());
 	Editor::GetDialogResource<Material>(material, "MaterialDialog", "Open material", "Material file (*.mat){.mat},.*");
 
-	
-	if (model) { 
-		ImGui::Text("Model: %s", model->name.c_str()); 
-		Editor::GetDialogResource<Model>(model, "ModelDialog", "Open model", "Model file (*.obj;*.fbx;*.glb){.obj,.fbx,.glb},.*");
-	}
-	if (material) { 
-		ImGui::Text("Material: %s", material->name.c_str()); 
-		Editor::GetDialogResource<Material>(material, "MaterialDialog", "Open material", "Material file (*.mat){.mat},.*");
-	}
-	
 }
 
 }

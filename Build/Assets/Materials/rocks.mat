@@ -1,6 +1,8 @@
 {
-  "program": "Shaders/basic_phong.prog",
+  "program": "Shaders/shadow_phong.prog",
   "baseMap": "Textures/rocks_base.jpg",
+  "normalMap": "Textures/rocks_normal.jpg",
+  "shadowMap": "shadowTexture",
   "baseColor": [ 1, 1, 1 ],
   "shininess": 128,
   "tiling": [ 5, 5 ],

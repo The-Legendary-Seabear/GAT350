@@ -8,7 +8,7 @@ namespace neu {
 
 	class Texture;
 
-	class Material : public Resource, GUI {
+	class Material : public Resource {
 	public:
 		enum class Parameters : uint32_t {
 			None		= 0,
@@ -16,7 +16,8 @@ namespace neu {
 			SpecularMap	= (1 << 1),
 			EmissiveMap	= (1 << 2),
 			NormalMap	= (1 << 3),
-			CubeMap		= (1 << 4)
+			CubeMap		= (1 << 4),
+			ShadowMap	= (1 << 5)
 		};
 
 	public:
@@ -42,6 +43,7 @@ namespace neu {
 
 		res_t<Texture> normalMap;
 		res_t<Texture> cubeMap;
+		res_t<Texture> shadowMap;
 
 		float ior{ 1.3f };
 		

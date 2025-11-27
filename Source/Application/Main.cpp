@@ -19,9 +19,13 @@ int main(int argc, char* argv[]) {
     renderTexture->Create(1024, 1024);
     neu::Resources().AddResource("postprocessTexture", renderTexture);
 
+    renderTexture = std::make_shared<neu::RenderTexture>();
+    renderTexture->CreateDepth(1024, 1024);
+    neu::Resources().AddResource("shadowTexture", renderTexture);
+
     // initialize scene
     auto scene = std::make_unique<neu::Scene>();
-    scene->Load("scenes/scene01.json");
+    scene->Load("scenes/scene04.json");
     scene->Start();
 
     auto editor = std::make_unique<neu::Editor>();

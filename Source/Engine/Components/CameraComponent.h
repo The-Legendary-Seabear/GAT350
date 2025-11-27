@@ -3,6 +3,12 @@
 namespace neu {
 	class CameraComponent : public Component {
 	public:
+		enum class ProjectionType {
+			Perspective,
+			Orthographic
+		};
+
+	public:
 		CLASS_PROTOTYPE(CameraComponent)
 
 		void Update(float dt) override;
@@ -21,10 +27,14 @@ namespace neu {
 		glm::mat4 projection{ 1 };
 		glm::mat4 view{ 1 };
 
+		ProjectionType projectionType = ProjectionType::Perspective;
+		bool shadowCamera{ false };
+
 		float fov = 70.0f;
 		float aspect = 0;
 		float near = 0.1f;
 		float far = 100.0f;
+		float size = 5.0f;
 
 		res_t<RenderTexture> outputTexture;
 		bool clearColorBuffer{ true };

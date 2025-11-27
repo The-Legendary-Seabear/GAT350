@@ -24,6 +24,7 @@ namespace neu {
 		glm::vec3 color{ 1, 1, 1 };
 		float intensity{ 1 };
 		float range{ 20 };
+		bool shadowCaster{ false };
 		LightType lightType = LightType::Point;
 		float outerCutoff = 30.0f;
 	};

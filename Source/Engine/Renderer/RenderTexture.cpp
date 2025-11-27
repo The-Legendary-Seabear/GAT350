@@ -49,6 +49,38 @@ namespace neu {
         return true;
     }
 
+    bool RenderTexture::CreateDepth(int width, int height) {
+        m_size = glm::ivec2{ width, height };
+
+        // framebuffer
+        glGenFramebuffers(1, &m_fbo);
+        glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);
+
+        // color texture
+        glGenTextures(1, &m_texture);
+        glBindTexture(GL_TEXTURE_2D, m_texture);
+
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, m_texture, 0);
+
+        glDrawBuffer(GL_NONE);
+		glReadBuffer(GL_NONE);
+
+        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+            LOG_WARNING("Error creating framebuffer");
+            return false;
+        }
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+        return true;
+    }
+
     void RenderTexture::BindFramebuffer() {
         glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);
     }

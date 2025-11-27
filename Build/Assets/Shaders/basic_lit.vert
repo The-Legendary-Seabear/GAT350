@@ -71,7 +71,7 @@ switch (light.type) {
 	break;
 
 	case DIRECTIONAL:
-		light_dir = normalize(light.direction);
+		light_dir = -light.direction;
 	break;
 
 	case SPOT:
@@ -81,7 +81,7 @@ switch (light.type) {
 
 		attenuation = calculateAttenuation(light_distance, light.range);
 
-		float angle = acos(dot(light_dir, light.direction));
+		float angle = acos(dot(light_dir, -light.direction));
 		if (angle > light.outerCutoff) attenuation = 0.0;
 		}
 	break;

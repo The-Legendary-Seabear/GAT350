@@ -3,9 +3,14 @@
 
 namespace neu {
 	FACTORY_REGISTER(CameraComponent)
+
 	void CameraComponent::Update(float dt) {
-		view = glm::lookAt(owner->transform.position, owner->transform.position + owner->transform.Forward(), owner->transform.Up());
-		projection = glm::perspective(glm::radians(fov), aspect, near, far);
+		view = (shadowCamera)
+			? glm::lookAt(owner->transform.position, owner->transform.position + owner->transform.Forward(), owner->transform.Up())
+			: glm::lookAt(owner->transform.position, owner->transform.position + owner->transform.Forward(), owner->transform.Up());
+		projection = (projectionType == ProjectionType::Perspective)
+			? glm::perspective(glm::radians(fov), aspect, near, far)
+			: glm::ortho(-size * aspect, size * aspect, -size, size, near, far);
 	}
 
 	void CameraComponent::Clear() {
@@ -39,10 +44,19 @@ namespace neu {
 		if (!SERIAL_READ(value, aspect)) aspect = GetEngine().GetRenderer().GetWidth() / (float)GetEngine().GetRenderer().GetHeight();
 		SERIAL_READ(value, near);
 		SERIAL_READ(value, far);
+		SERIAL_READ(value, size);
 
 		SERIAL_READ(value, backgroundColor);
 		SERIAL_READ(value, clearColorBuffer);
 		SERIAL_READ(value, clearDepthBuffer);
+
+		SERIAL_READ(value, shadowCamera);
+		std::string projectionTypeName;
+		SERIAL_READ_NAME(value, "projectionType", projectionTypeName);
+		if (projectionTypeName.empty() && equalsIgnoreCase(projectionTypeName, "orthographic")) {
+			projectionType = ProjectionType::Orthographic;
+		}
+		
 
 		std::string outputTextureName;
 		SERIAL_READ_NAME(value, "outputTexture", outputTextureName);
@@ -52,7 +66,17 @@ namespace neu {
 	}
 
 	void CameraComponent::UpdateGui() {
+		const char* types[] = { "Perspective", "Orthographic" };
+		ImGui::Combo("Projection", (int*)&projectionType, types, 2);
+
+		if (projectionType == ProjectionType::Perspective) {
 		ImGui::DragFloat("FOV", &fov, 0.1f, 10.0f, 100.0f);
+			
+		}
+		else {
+			ImGui::DragFloat("Size", &size, 0.1f, 1.0f);
+		}
+
 		ImGui::DragFloat("Aspect", &aspect, 0.1f);
 		ImGui::DragFloat("Near", &near, 0.1f);
 		ImGui::DragFloat("Far", &far, 0.1f);

@@ -7,6 +7,7 @@ namespace neu {
 		~RenderTexture();
 
 		bool Create(int width, int height, bool depth = true);
+		bool CreateDepth(int width, int height);
 		bool Load(const std::string& filename);
 
 		void BindFramebuffer();

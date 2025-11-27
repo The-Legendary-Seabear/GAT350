@@ -1,0 +1,4 @@
+{
+	"vertex_shader" : "shaders/depth.vert",
+	"fragment_shader" : "shaders/depth.frag"
+}

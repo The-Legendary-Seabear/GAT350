@@ -1,21 +1,29 @@
 {
-
+  "ambient_light": [ 0.2, 0.2, 0.2 ],
+  "post_process": true,
   "actors": [
     {
-      "name": "skybox",
+      "name": "light",
       "persistent": true,
       "transform": {
-        "position": [ 0, 0, 0 ],
-        "rotation": [ 0, 0, 0 ],
+        "position": [ 5, 15, 5 ],
+        "rotation": [ -90, 0, 0 ],
         "scale": [ 1, 1, 1 ]
       },
       "components": [
         {
-          "type": "ModelRenderer",
-          "model": "Models/cube.obj",
-          "material": "Materials/skybox.mat",
-          "enableDepth": false,
-          "cullFace": "front"
+          "type": "LightComponent",
+          "lightType": "directional",
+          "color": [ 1, 1, 1 ],
+          "intensity": 4,
+          "range": 30,
+          "shadowCaster": true
+        },
+        {
+          "type": "CameraComponent",
+          "projectionType": "orthographic",
+          "shadowCamera": true,
+          "outputTexture": "shadowTexture"
         }
       ]
     },
@@ -31,7 +39,27 @@
         {
           "type": "ModelRenderer",
           "model": "Models/spot.obj",
-          "material": "Materials/reflection.mat"
+          "material": "Materials/spot.mat"
+        },
+        {
+          "type": "RotationComponent",
+          "rotate": [ 0, 90, 0 ]
+        }
+      ]
+    },
+    {
+      "name": "spot 2",
+      "persistent": true,
+      "transform": {
+        "position": [ -3, 0, 2 ],
+        "rotation": [ 0, 180, 0 ],
+        "scale": [ 1, 1, 1 ]
+      },
+      "components": [
+        {
+          "type": "ModelRenderer",
+          "model": "Models/spot.obj",
+          "material": "Materials/spot.mat"
         },
         {
           "type": "RotationComponent",
@@ -51,24 +79,7 @@
         {
           "type": "ModelRenderer",
           "model": "Models/cube.obj",
-          "material": "Materials/rtt.mat"
-        }
-      ]
-    },
-    {
-      "name": "postprocess",
-      "persistent": true,
-      "active": true,
-      "transform": {
-        "position": [ 3, 3, 0 ],
-        "rotation": [ 0, 0, 0 ],
-        "scale": [ 1, 1, 1 ]
-      },
-      "components": [
-        {
-          "type": "ModelRenderer",
-          "model": "Models/quad.obj",
-          "material": "Materials/postprocess.mat"
+          "material": "Materials/crate.mat"
         }
       ]
     },
@@ -85,6 +96,39 @@
           "type": "ModelRenderer",
           "model": "Models/plane.obj",
           "material": "Materials/rocks.mat"
+        }
+      ]
+    },
+    {
+      "name": "window",
+      "persistent": true,
+      "active": true,
+      "transform": {
+        "position": [ 3, 3, 0 ],
+        "rotation": [ 0, 0, 0 ],
+        "scale": [ 1, 1, 1 ]
+      },
+      "components": [
+        {
+          "type": "ModelRenderer",
+          "model": "Models/quad.obj",
+          "material": "Materials/shadow.mat"
+        }
+      ]
+    },
+    {
+      "name": "postprocess",
+      "persistent": true,
+      "transform": {
+        "position": [ 3, 3, 0 ],
+        "rotation": [ 0, 0, 0 ],
+        "scale": [ 1, 1, 1 ]
+      },
+      "components": [
+        {
+          "type": "ModelRenderer",
+          "model": "Models/quad.obj",
+          "material": "Materials/postprocess.mat"
         }
       ]
     },
@@ -112,8 +156,8 @@
       "name": "camera",
       "persistent": true,
       "transform": {
-        "position": [ 0, 0, 0 ],
-        "rotation": [ -50, 0, 0 ],
+        "position": [ 0, 0, 5 ],
+        "rotation": [ 0, 0, 0 ],
         "scale": [ 1, 1, 1 ]
       },
       "components": [
@@ -128,23 +172,6 @@
           "type": "FirstPersonController",
           "speed": 5,
           "sensitivity": 0.2
-        }
-      ]
-    },
-    {
-      "name": "light",
-      "persistent": true,
-      "transform": {
-        "position": [ 5, 15, 5 ],
-        "rotation": [ 0, 0, 0 ],
-        "scale": [ 1, 1, 1 ]
-      },
-      "components": [
-        {
-          "type": "LightComponent",
-          "color": [ 1, 1, 1 ],
-          "intensity": 4,
-          "range": 30
         }
       ]
     }
